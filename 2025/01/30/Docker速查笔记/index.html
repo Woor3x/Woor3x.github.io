@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="keywords"><meta name="descriptioon" content=""><meta name="renderer" content="wekit"><link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/css/public.css"><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/iconfont.css"><title>Docker速查笔记 [ Hexo ]</title><link rel="stylesheet" href="/css/partial/footer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="stylesheet" href="/css/partial/sidebar.css"><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><meta name="generator" content="Hexo 8.1.1"></head><body><link rel="stylesheet" href="/css/partial/header.css"><div class="header"><div class="maxwidth"><div class="nav"><a id="artlist" href="/404"><i class="iconfont icon404"></i><span class="headhid">&nbsp;404</span></a><a id="artlist" href="/archives"><i class="iconfont iconarchives"></i><span class="headhid">&nbsp;Archives</span></a><a id="artlist" href="/link"><i class="iconfont iconlink"></i><span class="headhid">&nbsp;Link</span></a><a id="artlist" href="/about"><i class="iconfont iconabout"></i><span class="headhid">&nbsp;About</span></a></div><a class="search" href="/">TONG-H</a></div></div><div class="main"> <div class="maxwidth"><link rel="stylesheet" href="/css/partial/sidebar.css"><div id="sidebar"><div class="social"><a href="/archives" title="Home"><i class="iconfont iconHome"></i></a><a href="mailto:tongt0232@gmail.com" title="E-Mail"><i class="iconfont iconweibiaoti554"></i></a><a target="_blank" rel="noopener" href="https://github.com/tong-h" title="GitHub"><i class="iconfont iconGitHub"></i></a><a target="_blank" rel="noopener" href="https://juejin.cn/user/1204720474809741" title="juejin"><img src="/images/juejinicon-sidebar.png"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/u/20de04cc53de" title="jianshu"><img src="/images/jianicon-sidebar.png"></a></div><div class="structure category-list"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker%E9%80%9F%E6%9F%A5%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">Docker速查笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Dockerfile-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1. Dockerfile 是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Dockerfile-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">2. Dockerfile 的基本结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Dockerfile-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">3. Dockerfile 常用指令详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-FROM"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. FROM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-WORKDIR"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. WORKDIR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-COPY"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. COPY</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-RUN"><span class="toc-number">1.3.4.</span> <span class="toc-text">4. RUN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-EXPOSE"><span class="toc-number">1.3.5.</span> <span class="toc-text">5. EXPOSE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-CMD"><span class="toc-number">1.3.6.</span> <span class="toc-text">6. CMD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-ENV"><span class="toc-number">1.3.7.</span> <span class="toc-text">7. ENV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-ADD"><span class="toc-number">1.3.8.</span> <span class="toc-text">8. ADD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-ENTRYPOINT"><span class="toc-number">1.3.9.</span> <span class="toc-text">9. ENTRYPOINT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-VOLUME"><span class="toc-number">1.3.10.</span> <span class="toc-text">10. VOLUME</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Dockerfile-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.4.</span> <span class="toc-text">4. Dockerfile 最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%87%8F%E5%B0%91%E9%95%9C%E5%83%8F%E5%B1%82%E6%95%B0"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 减少镜像层数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8-dockerignore"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 使用 .dockerignore</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%9E%84%E5%BB%BA"><span class="toc-number">1.4.3.</span> <span class="toc-text">3. 多阶段构建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AE%9E%E6%88%98%EF%BC%9A%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA-Python-%E5%BA%94%E7%94%A8%E7%9A%84-Dockerfile"><span class="toc-number">1.5.</span> <span class="toc-text">5. 实战：编写一个 Python 应用的 Dockerfile</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.5.1.</span> <span class="toc-text">项目结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dockerfile-%E5%86%85%E5%AE%B9"><span class="toc-number">1.5.2.</span> <span class="toc-text">Dockerfile 内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E4%B8%8E%E8%BF%90%E8%A1%8C"><span class="toc-number">1.5.3.</span> <span class="toc-text">构建与运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%B8%B8%E8%A7%81%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E5%88%86%E7%B1%BB"><span class="toc-number">1.6.</span> <span class="toc-text">6. 常见基础镜像分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F"><span class="toc-number">1.6.1.</span> <span class="toc-text">操作系统镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E8%A8%80%E8%BF%90%E8%A1%8C%E6%97%B6%E9%95%9C%E5%83%8F"><span class="toc-number">1.6.2.</span> <span class="toc-text">语言运行时镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%95%9C%E5%83%8F"><span class="toc-number">1.6.3.</span> <span class="toc-text">数据库镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%95%9C%E5%83%8F"><span class="toc-number">1.6.4.</span> <span class="toc-text">Web 服务器镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%94%A8%E9%80%94%E9%95%9C%E5%83%8F"><span class="toc-number">1.6.5.</span> <span class="toc-text">特殊用途镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93"><span class="toc-number">1.7.</span> <span class="toc-text">✅ 总结</span></a></li></ol></li></ol></div><div class="tags"><a href="/tags/AI/" style="font-size: 18px; color: #da8d00">AI</a> <a href="/tags/AI%E5%BC%80%E5%8F%91/" style="font-size: 12px; color: #ffac00">AI开发</a> <a href="/tags/CTF/" style="font-size: 24px; color: #b46e00">CTF</a> <a href="/tags/Note/" style="font-size: 12px; color: #ffac00">Note</a> <a href="/tags/web/" style="font-size: 12px; color: #ffac00">web</a> <a href="/tags/%E5%A6%99%E5%A6%99%E5%B0%8F%E5%B7%A5%E5%85%B7/" style="font-size: 12px; color: #ffac00">妙妙小工具</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px; color: #ffac00">标签</a></div></div><div class="post rightside"><h1 class="artititle">Docker速查笔记</h1><div class="info"><i class="iconfont iconbiaoqian" title="文章标签"><span>Note</span></i><i class="iconfont iconshijian"><span title="文章发布时间">2025-01-30</span></i></div><div class="postDetail"><h1 id="Docker速查笔记"><a href="#Docker速查笔记" class="headerlink" title="Docker速查笔记"></a>Docker速查笔记</h1><h2 id="1-Dockerfile-是什么？"><a href="#1-Dockerfile-是什么？" class="headerlink" title="1. Dockerfile 是什么？"></a>1. Dockerfile 是什么？</h2><p>Dockerfile 是一个文本文件，里面包含了一系列指令，用来定义如何构建一个 Docker 镜像。你可以把它想象成一个“菜谱”，Docker 会根据这个“菜谱”一步步构建出你想要的镜像。</p>
+<hr>
+<h2 id="2-Dockerfile-的基本结构"><a href="#2-Dockerfile-的基本结构" class="headerlink" title="2. Dockerfile 的基本结构"></a>2. Dockerfile 的基本结构</h2><p>一个典型的 Dockerfile 由多个指令组成，每个指令对应一个操作。例如：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基础镜像</span></span><br><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">20.04</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制文件到容器中</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y python3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暴露端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行命令</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;python3&quot;</span>, <span class="string">&quot;app.py&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-Dockerfile-常用指令详解"><a href="#3-Dockerfile-常用指令详解" class="headerlink" title="3. Dockerfile 常用指令详解"></a>3. Dockerfile 常用指令详解</h2><h3 id="1-FROM"><a href="#1-FROM" class="headerlink" title="1. FROM"></a>1. <code>FROM</code></h3><ul>
+<li><strong>作用</strong>：指定基础镜像。</li>
+<li><strong>语法</strong>：<code>FROM &lt;镜像名&gt;:&lt;标签&gt;</code></li>
+<li><strong>示例</strong>：<code>FROM ubuntu:20.04</code></li>
+</ul>
+<h3 id="2-WORKDIR"><a href="#2-WORKDIR" class="headerlink" title="2. WORKDIR"></a>2. <code>WORKDIR</code></h3><ul>
+<li><strong>作用</strong>：设置工作目录，后续命令会在此执行。</li>
+<li><strong>示例</strong>：<code>WORKDIR /app</code></li>
+</ul>
+<h3 id="3-COPY"><a href="#3-COPY" class="headerlink" title="3. COPY"></a>3. <code>COPY</code></h3><ul>
+<li><strong>作用</strong>：将本地文件复制到容器中。</li>
+<li><strong>示例</strong>：<code>COPY . .</code></li>
+</ul>
+<h3 id="4-RUN"><a href="#4-RUN" class="headerlink" title="4. RUN"></a>4. <code>RUN</code></h3><ul>
+<li><strong>作用</strong>：执行命令（通常用于安装依赖）。</li>
+<li><strong>示例</strong>：<code>RUN apt-get update &amp;&amp; apt-get install -y python3</code></li>
+</ul>
+<h3 id="5-EXPOSE"><a href="#5-EXPOSE" class="headerlink" title="5. EXPOSE"></a>5. <code>EXPOSE</code></h3><ul>
+<li><strong>作用</strong>：声明容器运行时监听的端口（不自动映射）。</li>
+<li><strong>示例</strong>：<code>EXPOSE 80</code></li>
+</ul>
+<h3 id="6-CMD"><a href="#6-CMD" class="headerlink" title="6. CMD"></a>6. <code>CMD</code></h3><ul>
+<li><strong>作用</strong>：指定容器启动时默认执行的命令。</li>
+<li><strong>示例</strong>：<code>CMD [&quot;python3&quot;, &quot;app.py&quot;]</code></li>
+</ul>
+<h3 id="7-ENV"><a href="#7-ENV" class="headerlink" title="7. ENV"></a>7. <code>ENV</code></h3><ul>
+<li><strong>作用</strong>：设置环境变量。</li>
+<li><strong>示例</strong>：<code>ENV PYTHON_VERSION=3.8</code></li>
+</ul>
+<h3 id="8-ADD"><a href="#8-ADD" class="headerlink" title="8. ADD"></a>8. <code>ADD</code></h3><ul>
+<li><strong>作用</strong>：类似 COPY，但可解压或从 URL 下载文件。</li>
+<li><strong>示例</strong>：<code>ADD https://example.com/file.tar.gz /app</code></li>
+</ul>
+<h3 id="9-ENTRYPOINT"><a href="#9-ENTRYPOINT" class="headerlink" title="9. ENTRYPOINT"></a>9. <code>ENTRYPOINT</code></h3><ul>
+<li><strong>作用</strong>：设置容器启动时固定执行命令。</li>
+<li><strong>示例</strong>：<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;python3&quot;</span>]</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;app.py&quot;</span>]</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="10-VOLUME"><a href="#10-VOLUME" class="headerlink" title="10. VOLUME"></a>10. <code>VOLUME</code></h3><ul>
+<li><strong>作用</strong>：声明挂载点，用于持久化数据。</li>
+<li><strong>示例</strong>：<code>VOLUME /data</code></li>
+</ul>
+<hr>
+<h2 id="4-Dockerfile-最佳实践"><a href="#4-Dockerfile-最佳实践" class="headerlink" title="4. Dockerfile 最佳实践"></a>4. Dockerfile 最佳实践</h2><h3 id="1-减少镜像层数"><a href="#1-减少镜像层数" class="headerlink" title="1. 减少镜像层数"></a>1. 减少镜像层数</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y python3 &amp;&amp; apt-get clean</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-使用-dockerignore"><a href="#2-使用-dockerignore" class="headerlink" title="2. 使用 .dockerignore"></a>2. 使用 <code>.dockerignore</code></h3><p>防止无关文件被复制到镜像中。</p>
+<h3 id="3-多阶段构建"><a href="#3-多阶段构建" class="headerlink" title="3. 多阶段构建"></a>3. 多阶段构建</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span> AS build</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install &amp;&amp; npm run build</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> nginx:alpine</span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=build /app/dist /usr/share/nginx/html</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-实战：编写一个-Python-应用的-Dockerfile"><a href="#5-实战：编写一个-Python-应用的-Dockerfile" class="headerlink" title="5. 实战：编写一个 Python 应用的 Dockerfile"></a>5. 实战：编写一个 Python 应用的 Dockerfile</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">my-app/</span><br><span class="line">├── app.py</span><br><span class="line">├── requirements.txt</span><br><span class="line">└── Dockerfile</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dockerfile-内容"><a href="#Dockerfile-内容" class="headerlink" title="Dockerfile 内容"></a>Dockerfile 内容</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.8</span>-slim</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> requirements.txt .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip install --no-cache-dir -r requirements.txt</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">5000</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;python&quot;</span>, <span class="string">&quot;app.py&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="构建与运行"><a href="#构建与运行" class="headerlink" title="构建与运行"></a>构建与运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t my-python-app .</span><br><span class="line">docker run -p 5000:5000 my-python-app</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-常见基础镜像分类"><a href="#6-常见基础镜像分类" class="headerlink" title="6. 常见基础镜像分类"></a>6. 常见基础镜像分类</h2><h3 id="操作系统镜像"><a href="#操作系统镜像" class="headerlink" title="操作系统镜像"></a>操作系统镜像</h3><table>
+<thead>
+<tr>
+<th>镜像名</th>
+<th>特点</th>
+<th>示例标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ubuntu</td>
+<td>功能全面</td>
+<td><code>ubuntu:22.04</code></td>
+</tr>
+<tr>
+<td>alpine</td>
+<td>轻量（5MB）</td>
+<td><code>alpine:latest</code></td>
+</tr>
+<tr>
+<td>centos</td>
+<td>稳定，常用于企业</td>
+<td><code>centos:8</code></td>
+</tr>
+<tr>
+<td>debian</td>
+<td>稳定精简</td>
+<td><code>debian:bullseye</code></td>
+</tr>
+</tbody></table>
+<h3 id="语言运行时镜像"><a href="#语言运行时镜像" class="headerlink" title="语言运行时镜像"></a>语言运行时镜像</h3><table>
+<thead>
+<tr>
+<th>语言</th>
+<th>官方镜像示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Python</td>
+<td><code>python:3.11-slim</code></td>
+<td>轻量环境</td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td><code>node:18-alpine</code></td>
+<td>带 npm&#x2F;yarn</td>
+</tr>
+<tr>
+<td>Go</td>
+<td><code>golang:1.20-alpine</code></td>
+<td>编译环境</td>
+</tr>
+<tr>
+<td>Java</td>
+<td><code>eclipse-temurin:17-jdk-alpine</code></td>
+<td>OpenJDK</td>
+</tr>
+<tr>
+<td>PHP</td>
+<td><code>php:8.2-apache</code></td>
+<td>带 Apache 支持</td>
+</tr>
+</tbody></table>
+<h3 id="数据库镜像"><a href="#数据库镜像" class="headerlink" title="数据库镜像"></a>数据库镜像</h3><table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>镜像名</th>
+<th>常用标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MySQL</td>
+<td><code>mysql</code></td>
+<td><code>mysql:8.0</code></td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td><code>postgres</code></td>
+<td><code>postgres:latest</code></td>
+</tr>
+<tr>
+<td>Redis</td>
+<td><code>redis</code></td>
+<td><code>redis:6.2</code></td>
+</tr>
+</tbody></table>
+<h3 id="Web-服务器镜像"><a href="#Web-服务器镜像" class="headerlink" title="Web 服务器镜像"></a>Web 服务器镜像</h3><table>
+<thead>
+<tr>
+<th>服务</th>
+<th>镜像名</th>
+<th>示例标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nginx</td>
+<td><code>nginx</code></td>
+<td><code>nginx:latest</code></td>
+</tr>
+<tr>
+<td>Apache HTTPD</td>
+<td><code>httpd</code></td>
+<td><code>httpd:2.4</code></td>
+</tr>
+</tbody></table>
+<h3 id="特殊用途镜像"><a href="#特殊用途镜像" class="headerlink" title="特殊用途镜像"></a>特殊用途镜像</h3><table>
+<thead>
+<tr>
+<th>镜像</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>scratch</td>
+<td>空镜像，用于静态二进制</td>
+</tr>
+<tr>
+<td>busybox</td>
+<td>极轻量系统工具集</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h2><ul>
+<li>合理使用 <code>.dockerignore</code> 减少冗余。</li>
+<li>多阶段构建减少体积。</li>
+<li>优先选择官方轻量镜像。</li>
+<li>注意 CMD 与 ENTRYPOINT 的区别。</li>
+</ul>
+</div><link rel="stylesheet" href="/css/partial/footer.css"><div class="footer"><p><span>Copyright © 2017 - 2023</span><a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">蜀ICP备19024124号</a></p><p><i class="iconfont iconchakan"><span>本站总访问量</span><span id="busuanzi_container_site_pv">  <span id="busuanzi_value_site_pv"></span> </span></i><i class="iconfont iconabout"><span>本站访客数</span><span id="busuanzi_container_site_uv">  <span id="busuanzi_value_site_uv"></span> </span></i></p></div></div></div></div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
