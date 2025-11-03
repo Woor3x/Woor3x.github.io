@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="keywords"><meta name="descriptioon" content=""><meta name="renderer" content="wekit"><link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/css/public.css"><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/iconfont.css"><title>Blog [ Hexo ]</title><link rel="stylesheet" href="/css/partial/footer.css"><link rel="stylesheet" href="/css/partial/posts.css"><link rel="stylesheet" href="/css/partial/posts.css"><link rel="stylesheet" href="/css/partial/sidebar.css"><link rel="stylesheet" href="/css/archive.css"><link rel="stylesheet" href="/css/index.css"><meta name="generator" content="Hexo 8.1.1"></head><body><link rel="stylesheet" href="/css/partial/header.css"><div class="header"><div class="maxwidth"><div class="nav"><a id="artlist" href="/404"><i class="iconfont icon404"></i><span class="headhid">&nbsp;404</span></a><a class="focuspage" id="artlist" href="/archives"><i class="iconfont iconarchives"></i><span class="headhid">&nbsp;Archives</span></a><a id="artlist" href="/link"><i class="iconfont iconlink"></i><span class="headhid">&nbsp;Link</span></a><a id="artlist" href="/about"><i class="iconfont iconabout"></i><span class="headhid">&nbsp;About</span></a></div><a class="search" href="/">TONG-H</a></div></div><div class="main"> <div class="maxwidth"><link rel="stylesheet" href="/css/partial/sidebar.css"><div id="sidebar"><div class="social"><a href="/archives" title="Home"><i class="iconfont iconHome"></i></a><a href="mailto:tongt0232@gmail.com" title="E-Mail"><i class="iconfont iconweibiaoti554"></i></a><a target="_blank" rel="noopener" href="https://github.com/tong-h" title="GitHub"><i class="iconfont iconGitHub"></i></a><a target="_blank" rel="noopener" href="https://juejin.cn/user/1204720474809741" title="juejin"><img src="/images/juejinicon-sidebar.png"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/u/20de04cc53de" title="jianshu"><img src="/images/jianicon-sidebar.png"></a></div><div class="tags"><a href="/tags/AI%E5%BC%80%E5%8F%91/" style="font-size: 12px; color: #ffac00">AI开发</a> <a href="/tags/web/" style="font-size: 12px; color: #ffac00">web</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px; color: #ffac00">标签</a></div></div><div class="archive rightside"><div id="list_archives" style="opacity: 0;display:  none"><div class="switch" id="arshow"><i class="iconfont iconarchives"></i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">January 1970</a><span class="archive-list-count">2</span></li></ul></div><div id="normalposts"><div class="switch" id="poshow"><i class="iconfont iconshijian"></i><span>Timeline</span></div><article><a class="artititle" href="/2024/12/10/page-3/">Datawhale-AI活动</a><div class="content ellipse"><p>#定制专属嬛嬛大模型
+##**Step1:注册讯飞星辰Maas**
+##Step2:下载嬛嬛数据集
+微调数据集格式:
+###Alpaca格式:
+12345&#123;    &quot;instruction&quot;: &quot;小姐，别的秀女都在求中选，唯有咱们小姐想被撂牌子，菩萨一定记得真真儿的——&quot;,    &quot;input&quot;: &quot;&quot;,    &quot;output&quot;: &quot;嘘——都说许愿说破是不灵的。&quot;&#125;
+
+字段说明:
+
+instruction：任务的指令，模型需要完成的具体操作，一般可以对应到用户输入的 Prompt 。
+input：任务所需的输入内容。若任务是开放式的，或者不需要明确输入，可以为空字符串。
+output：在给定指令和输入的情况下，模型需要生成的期望输出，也就是对应的...</p></div><div class="meta"><i class="iconfont iconshijian" title="创建时间">2024-12-10</i></div></article><article><a class="artititle" href="/2024/10/27/page-2/">一些小笔记</a><div class="content ellipse"><p>#第一课
+##认识漏洞
+###约定
+poc：漏洞演示，一般不具有攻击性，仅仅证明漏洞存在
+exp：漏洞利用脚本、工具，具有攻击性，可以直接进行漏洞利用，执行命令或者读取文件
+脚本：利用漏洞需要执行的本地’程序’，方便漏洞利用者替代重复手工操作
+###漏洞的产生原因
+
+设计缺陷
+逻辑错误
+代码 bug
+越权漏洞
+其他漏洞
+
+###漏洞的利用方式
+
+失能
+服务宕机
+
+
+读取
+读敏感文件
+读数据库信息
+
+
+写入
+篡改数据
+提权
+加密硬盘
+
+
+执行
+执行命令
+内网渗透
+反渗 shell
+
+
+
+###漏洞利用之信息泄露
+
+版本软件信息泄露：git svn hg bzr CSV
+敏感文件信息泄露：robots.txt www.zip 静态文件注释泄露
+配置错误信息泄露：DS_Store WEB-INF Apache&#x2F;Nginx 错误配置
+
+###信息泄露漏洞利用
+
+http 头信息泄露...</p></div><div class="meta"><i class="iconfont iconshijian" title="创建时间">2024-10-27</i></div></article><article><a class="artititle" href="/2024/09/21/page-1/">搭建博客的艰苦过程</a><div class="content ellipse"><p>#2024&#x2F;9&#x2F;21
+心血来潮也是来搭了个博客
+主要是参照了文档 : 从零搭建 Hexo + Github 博客 - 洛谷专栏 (luogu.com.cn)
+前面很顺利，但是在ssh连接github时报错ssh: connect to … github.com port 22: Connection refused发现22端口不可用
+然后度娘一番改用443端口 ssh: connect to host github.com port 22: Connection refused_ssh:connect-CSDN博客
+然后也是非常的顺利，选用了非常好看的Butterlfy主题，最后上传博客后发现无法加载，仔细排查后发现上传的博客在master的分支里，而默认的是main分支，解决方法只需要在setting-&gt;pages的branch将main改成master就...</p></div><div class="meta"><i class="iconfont iconshijian" title="创建时间">2024-09-21</i></div></article><article><a class="artititle" href="/1970/01/01/hello-world/">Hello World</a><div class="content ellipse"><p>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
+
+More info: Writing
+Run server1$ hexo server
+
+More info: Server
+Generate static files1$ hexo generate
+
+More info: Generating
+Deploy to rem...</p></div><div class="meta"><i class="iconfont iconshijian" title="创建时间">1970-01-01</i></div></article><article><a class="artititle" href="/1970/01/01/games-201/"></a><div class="content ellipse"><p></p></div><div class="meta"><i class="iconfont iconshijian" title="创建时间">1970-01-01</i></div></article><div id="paginator"><span class="page-number current">1</span></div></div><script>document.getElementById('arshow').onclick = function() {
+    document.getElementById('list_archives').style = 'opacity: 0;display: none'
+    document.getElementById('normalposts').style = 'opacity: 0;display: block'
+    setTimeout(() => {
+        document.getElementById('normalposts').style.opacity = '1'                        
+    }, 100);
+}
+document.getElementById('poshow').onclick = function() {
+    document.getElementById('normalposts').style = 'opacity: 0;display: none'
+    document.getElementById('list_archives').style = 'opacity: 1;display: block'
+}</script><link rel="stylesheet" href="/css/partial/footer.css"><div class="footer"><p><span>Copyright © 2017 - 2023</span><a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">蜀ICP备19024124号</a></p><p><i class="iconfont iconchakan"><span>本站总访问量</span><span id="busuanzi_container_site_pv">  <span id="busuanzi_value_site_pv"></span> </span></i><i class="iconfont iconabout"><span>本站访客数</span><span id="busuanzi_container_site_uv">  <span id="busuanzi_value_site_uv"></span> </span></i></p></div></div></div></div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

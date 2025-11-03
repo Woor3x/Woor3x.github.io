@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="keywords"><meta name="descriptioon" content=""><meta name="renderer" content="wekit"><link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/css/public.css"><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/iconfont.css"><title>Datawhale-AI活动 [ Hexo ]</title><link rel="stylesheet" href="/css/partial/footer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="stylesheet" href="/css/partial/sidebar.css"><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><meta name="generator" content="Hexo 8.1.1"></head><body><link rel="stylesheet" href="/css/partial/header.css"><div class="header"><div class="maxwidth"><div class="nav"><a id="artlist" href="/404"><i class="iconfont icon404"></i><span class="headhid">&nbsp;404</span></a><a id="artlist" href="/archives"><i class="iconfont iconarchives"></i><span class="headhid">&nbsp;Archives</span></a><a id="artlist" href="/link"><i class="iconfont iconlink"></i><span class="headhid">&nbsp;Link</span></a><a id="artlist" href="/about"><i class="iconfont iconabout"></i><span class="headhid">&nbsp;About</span></a></div><a class="search" href="/">TONG-H</a></div></div><div class="main"> <div class="maxwidth"><link rel="stylesheet" href="/css/partial/sidebar.css"><div id="sidebar"><div class="social"><a href="/archives" title="Home"><i class="iconfont iconHome"></i></a><a href="mailto:tongt0232@gmail.com" title="E-Mail"><i class="iconfont iconweibiaoti554"></i></a><a target="_blank" rel="noopener" href="https://github.com/tong-h" title="GitHub"><i class="iconfont iconGitHub"></i></a><a target="_blank" rel="noopener" href="https://juejin.cn/user/1204720474809741" title="juejin"><img src="/images/juejinicon-sidebar.png"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/u/20de04cc53de" title="jianshu"><img src="/images/jianicon-sidebar.png"></a></div><div class="tags"><a href="/tags/AI%E5%BC%80%E5%8F%91/" style="font-size: 12px; color: #ffac00">AI开发</a> <a href="/tags/web/" style="font-size: 12px; color: #ffac00">web</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px; color: #ffac00">标签</a></div></div><div class="post rightside"><h1 class="artititle">Datawhale-AI活动</h1><div class="info"><i class="iconfont iconbiaoqian" title="文章标签"><span>AI开发</span></i><i class="iconfont iconshijian"><span title="文章发布时间">2024-12-10</span></i></div><div class="postDetail"><p>#<strong>定制专属嬛嬛大模型</strong></p>
+<p>##**Step1:注册<a target="_blank" rel="noopener" href="https://training.xfyun.cn/?ch=maas-dw-mxb">讯飞星辰Maas**</a></p>
+<p>##<strong>Step2:下载<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/self-llm/blob/master/dataset/huanhuan.json">嬛嬛数据集</a></strong></p>
+<p>微调数据集格式:</p>
+<p>###<strong>Alpaca格式</strong>:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;instruction&quot;</span><span class="punctuation">:</span> <span class="string">&quot;小姐，别的秀女都在求中选，唯有咱们小姐想被撂牌子，菩萨一定记得真真儿的——&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;input&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;output&quot;</span><span class="punctuation">:</span> <span class="string">&quot;嘘——都说许愿说破是不灵的。&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>字段说明</strong>:</p>
+<ul>
+<li><code>instruction</code>：任务的指令，模型需要完成的具体操作，一般可以对应到用户输入的 <strong>Prompt</strong> 。</li>
+<li><code>input</code>：任务所需的输入内容。若任务是开放式的，或者不需要明确输入，可以为空字符串。</li>
+<li><code>output</code>：在给定指令和输入的情况下，模型需要生成的期望输出，也就是对应的正确结果或参考答案。</li>
+</ul>
+<p><img src="https://datawhale-business.oss-cn-hangzhou.aliyuncs.com/3442/dashboard/1733735055757/image.png"></p>
+<p>###<strong>ShareGPT格式</strong></p>
+<p> <img src="https://datawhale-business.oss-cn-hangzhou.aliyuncs.com/3442/dashboard/1733735030226/image.png"></p>
+<p>##<strong>Step3:定制专属嬛嬛大模型:</strong></p>
+<p>1.讯飞星辰Maas平台[创建模型]</p>
+<p>2.配置基础信息，选择千问2.5 7B模型</p>
+<p>3.创建数据集，上传缓缓数据集，选择Alpaca格式</p>
+<p>4.提交任务即可开始训练</p>
+<p>##<strong>Step4:<a target="_blank" rel="noopener" href="https://console.xfyun.cn/app/myapp">创建应用</a></strong></p>
+<p>1.根据需求填写内容创建新应用</p>
+<p>2.等待模型训练完毕后授权给刚创建的应用</p>
+<p>3.点击体验，即可与嬛嬛对话</p>
+<p>4.选择服务中再添加上Qwen_v2.5 7b模型，可以对比两个模型</p>
+<p>##<strong>Step5:体验AI嬛嬛</strong></p>
+<p>到这里已经完成所有步骤了，可以和嬛嬛愉快的聊天了(●’◡’●)</p>
+</div><link rel="stylesheet" href="/css/partial/footer.css"><div class="footer"><p><span>Copyright © 2017 - 2023</span><a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">蜀ICP备19024124号</a></p><p><i class="iconfont iconchakan"><span>本站总访问量</span><span id="busuanzi_container_site_pv">  <span id="busuanzi_value_site_pv"></span> </span></i><i class="iconfont iconabout"><span>本站访客数</span><span id="busuanzi_container_site_uv">  <span id="busuanzi_value_site_uv"></span> </span></i></p></div></div></div></div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
